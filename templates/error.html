@@ -1,0 +1,12 @@
+{% extends "DashBoard_base.html" %} 
+
+<meta charset="UTF-8">
+
+{% block dashboard %}
+<div class="alert alert-warning" align='center'>
+	<a href="#" class="close" data-dismiss="alert">
+		&times;
+	</a>
+	<strong>警告！</strong>{{ error }}<a href="{% url 'view_SRC' %}">返回主页</a>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends "DashBoard_base.html" %} 
+
+<meta charset="UTF-8">
+
+{% block dashboard %}
+	<h2 class="sub-header">企业下属域名列表</h2>
+    <div class="table-responsive">
+	    <table class="table table-striped">
+	    	<thead>
+	    		<tr>
+                  <th>子域名编号</th>
+                  <th>子域名名称</th>
+                  <th>子域名地址</th>
+                  <th>创建时间</th>
+                  <th>更新时间</th>
+                  <th>操作选项</th>
+                  <th>网站详情</th>
+                </tr>
+              </thead>
+              {% if WEB_list %}
+              	{% for WEB in WEB_list %}
+              	<tbody>
+              		<tr>
+              			<td >{{WEB.subdomain_id}}</td>
+	              		<td>{{WEB.subdomain_name}}</td>
+	              		<td><a href={{WEB.subdomain_www}} target = "_blank" >{{WEB.subdomain_www}}</a></td>
+	              		<td>{{WEB.subdomain_starttime}}</td>
+	              		<td>{{WEB.subdomain_updatetime}}</td>
+	              		<td>
+	              		<div class="btn-group">
+		                  	<button type="button" class="btn btn-info btn-xs">操作</button>
+		                  	<button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+		                  	<span class="caret"></span>
+		                  	<span class="sr-only">Toggle Dropdown</span>
+		                  	</button>
+		                  	<ul class="dropdown-menu" role="menu">
+		                  		<li><a href='#'>更新</a></li>
+		                  		<li><a data-href="{% url 'delete_WEB' WEB.subdomain_id %}" data-toggle="modal" data-target="#confirm-delete">删除</a></li>
+		                  		
+		                  	</ul>
+		                  </div>
+		                  {% include 'ensure.html' %}
+	              		</td>
+	              		<td><a href="{% url 'view_WEBinfo' WEB.subdomain_id %}">详细信息</a></td>
+              		</tr>
+              	</tbody>
+              	{% endfor %}
+              {% else %}
+              <td><h3>暂无信息</h3></td>
+              {% endif %}
+               <tbody>
+               <tr>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#web_add"><span class="glyphicon glyphicon-plus"></span>添加信息</button></td>
+               </tr>
+              </tbody>
+	    </table>
+	    <div class="pagination">
+             	<ul class="pagination">
+             		{% if WEB_list.has_previous %}
+						<li><a href="?page={{ WEB_list.previous_page_number }}">&laquo;</a></li>
+					{% endif %}
+					{% for page_num in WEB_list.paginator.page_range %}		
+						{% if page_num == WEB_list.number %}
+							<li class="active"><a href="?page={{ page_num }}">{{page_num}}</a></li>
+						{% else %}
+							<li class=""><a href="?page={{ page_num }}">{{page_num}}</a></li>
+						{% endif %}
+					{% endfor %}
+					{% if WEB_list.has_next %}
+						<li><a href="?page={{ WEB_list.next_page_number }}">&raquo;</a></li>
+					{% endif %}
+				</ul>
+			</div>
+    </div>
+{% include 'SRCinfo/SubDomain_add.html' %}
+{% endblock %}

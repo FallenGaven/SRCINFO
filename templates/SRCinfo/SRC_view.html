@@ -1,0 +1,92 @@
+{% extends "DashBoard_base.html" %} 
+
+<meta charset="UTF-8">
+
+{% block dashboard %}
+	<h2 class="sub-header">应急响应中心列表</h2>
+    <div class="table-responsive">
+	    <table class="table table-striped">
+	    	<thead>
+	    		<tr>
+                  <th>企业编号</th>
+                  <th>企业图标</th>
+                  <th>企业名称</th>
+                  <th>官网地址</th>
+                  <th>应急中心</th>
+                  <th>SRC地址</th>
+                  <th>更新时间</th>
+                  <th>操作选项</th>
+                  <th>企业详情</th>
+                  
+                </tr>
+              </thead>
+              
+              {% if SRC_list %}
+              	{% for SRC in SRC_list %}
+              	<tbody>
+              		<tr>
+              			<td >{{SRC.company_id}}</td>
+	              		<td><img src={{SRC.company_ioc}} class="img-responsive" height="30" width="30"></td>
+	              		<td>{{SRC.company_name}}</td>
+	              		<td><a href={{SRC.company_www}} target = "_blank" >{{SRC.company_www}}</a></td>
+	              		<td>{{SRC.company_src_name}}</td>
+	              		<td><a href={{SRC.company_src_www}} target = "_blank" >{{SRC.company_src_www}}</a></td>
+	              		<td>{{SRC.company_updatetime}}</td>
+	              		<td>
+	              		<div class="btn-group">
+		                  	<button type="button" class="btn btn-info btn-xs">操作</button>
+		                  	<button type="button" class="btn btn-info btn-xs dropdown-toggle" data-toggle="dropdown">
+		                  	<span class="caret"></span>
+		                  	<span class="sr-only">Toggle Dropdown</span>
+		                  	</button>
+		                  	<ul class="dropdown-menu" role="menu">
+		                  		<li><a href='#'>更新</a></li>
+		                  		<li><a data-href="{% url 'delete_SRC' SRC.company_id %}" data-toggle="modal" data-target="#confirm-delete">删除</a></li>
+		                  		
+		                  	</ul>
+		                  </div>
+		                  {% include 'ensure.html' %}
+	              		</td>
+	              		<td><a href="{% url 'view_WEB' SRC.company_id %}">详细信息</a></td>
+              		</tr>
+              	</tbody>
+              	{% endfor %}
+              {% else %}
+              <td><h3>暂无信息</h3></td>
+              {% endif %}
+               <tbody>
+               <tr>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td></td>
+	              <td><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#src_add"><span class="glyphicon glyphicon-plus"></span>添加信息</button></td>
+               </tr>
+              </tbody>
+	    </table>
+	    <div class="pagination">
+             	<ul class="pagination">
+             		{% if SRC_list.has_previous %}
+						<li><a href="?page={{ SRC_list.previous_page_number }}">&laquo;</a></li>
+					{% endif %}
+					{% for page_num in SRC_list.paginator.page_range %}		
+						{% if page_num == SRC_list.number %}
+							<li class="active"><a href="?page={{ page_num }}">{{page_num}}</a></li>
+						{% else %}
+							<li class=""><a href="?page={{ page_num }}">{{page_num}}</a></li>
+						{% endif %}
+					{% endfor %}
+					{% if SRC_list.has_next %}
+						<li><a href="?page={{ SRC_list.next_page_number }}">&raquo;</a></li>
+					{% endif %}
+				</ul>
+			</div>
+    </div>
+
+
+{% include 'SRCinfo/SRC_add.html' %}
+{% endblock %}

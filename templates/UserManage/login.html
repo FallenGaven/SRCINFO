@@ -1,0 +1,57 @@
+{% load staticfiles %}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+     
+    <meta name="description" content="Security Manage">  
+    <meta name="author" content="gy071089">  
+  
+    <title>登陆</title>  
+  
+    <!-- Bootstrap core CSS -->  
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">  
+ 	<link href="{% static 'bootstrap/css/bootstrap-theme.css' %}" rel="stylesheet">
+ 	
+ 	<script src="{% static 'jQuery/jquery.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	
+	<style>
+		body{background-size:cover;font-size: 16px;}
+		.form{
+			background: rgba(255,255,255,0.5);
+		    padding: 30px;
+		    padding-left: 40px;
+		    padding-right: 40px;
+		}
+	</style>
+</head>
+<body background="{% static 'imgs/background.jpg' %}">
+{% block user %}
+	<div class="container"style="margin-top: 200px;" align='center'>
+		<form class="col-sm-offset-4 col-sm-4 col-md-offset-4col form form-horizontal" method="post" id="login_form">
+			{% csrf_token %}
+			<h3 class="text-center">登录</h3>
+			<div class="form-group">
+				<label for="username"class="col-sm-2 control-label">账&nbsp;号</label>
+				<div class="col-sm-10">
+				{{ sf.username}}
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="id_password"class="col-sm-2 control-label">密&nbsp;码</label>
+				<div class="col-sm-10">
+				{{ sf.password}}
+				</div>
+			</div>
+			<button type="submit" class="btn btn-primary">登录</button>
+			<div align=right>
+				<a href="{% url 'regist' %}" >前往注册</a>
+			</div>
+		</form>
+	</div>
+{% endblock %}
+</body>
+</html>

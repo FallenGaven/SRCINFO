@@ -1,0 +1,241 @@
+{% extends "DashBoard_base.html" %} 
+
+<meta charset="UTF-8">
+
+{% block dashboard %}
+
+<ul class="nav nav-tabs">
+  <li role="presentation" class="active"><a href="#subdomainmain" data-toggle="tab">子域名信息</a></li>
+  <li role="presentation"><a href="#web" data-toggle="tab">更新网站信息</a></li>
+  <li role="presentation"><a href="#server" data-toggle="tab">更新服务器信息</a></li>
+</ul>
+
+
+<div id="myTabContent" class="tab-content">
+	<div class="tab-pane fade in active" id="subdomainmain">
+		<div class="table-responsive">
+		    <table class="table table-striped">
+		    	<thead>
+		    		<tr>
+	                  <th>子域名编号</th>
+	                  <th>子域名名称</th>
+	                  <th>子域名地址</th>
+	                  <th>创建时间</th>
+	                  <th>更新时间</th>
+	                </tr>
+	             </thead>
+	              {% if subdomain_list %}
+	              	{% for subdomain in subdomain_list %}
+	              	<tbody>
+	              		<tr>
+	              			<td >{{subdomain.subdomain_id}}</td>
+		              		<td>{{subdomain.subdomain_name}}</td>
+		              		<td><a href={{subdomain.subdomain_www}} target = "_blank" >{{subdomain.subdomain_www}}</a></td>
+		              		<td>{{subdomain.subdomain_starttime}}</td>
+		              		<td>{{subdomain.subdomain_updatetime}}</td>
+	              		</tr>
+	              	</tbody>
+	              	{% endfor %}
+	              {% else %}
+	              <td>错误页面</td>
+	              {% endif %}
+		    </table>
+			<div>
+				<div class='col-md-4'>
+					<h3>网站列表</h3>
+					<ul>
+					{% if webinfo_list %}
+						{% for webinfo in webinfo_list %}
+						<li class="dl-horizontal">
+							<a href={{webinfo.web_url}} >{{webinfo.web_url}}</a>
+						</li>
+						{% endfor %}
+					{% else %}
+						<a>暂无信息，请更新网站信息</a>
+					{% endif %}
+					</ul>
+				</div>
+				<div class='col-md-4'>
+					<h3>组件列表</h3>
+					<ul>
+					{% for plug_list in plug_lists %}
+		              {% if plug_list  %}
+		              	{% for plug in plug_list %}
+		              	<li>{{plug.plug_name}}</li>
+		              	{% endfor %}
+		              {% endif %}
+		            {% endfor %}
+					</ul>
+				</div>
+				<div class='col-md-4'>
+					<h3>服务器列表</h3>
+					<ul>
+		            {% if server_list %}
+						{% for server in server_list %}
+							<li>{{server.server_ip}}</li>
+						{% endfor %}
+					{% else %}
+						<a>暂无信息，请更新服务器信息</a>
+					{% endif %}
+					</ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tab-pane fade" id="web">
+		<div class="table-responsive">
+		    <table class="table table-striped">
+		    	<thead>
+		    		<tr>
+	                  <th>网页链接</th>
+	                  <th>前端语言</th>
+	                  <th>开发语言</th>
+	                  <th>开发框架</th>
+	                  <th>网站模板</th>
+	                  <th>WEB容器</th>
+	                </tr>
+	              </thead>
+	              {% if webinfo_list %}
+	              	{% for webinfo in webinfo_list %}
+	              	<tbody>
+	              		<tr>
+	              			<td><a href={{WEB.subdomain_www}} target = "_blank">{{webinfo.web_url}}</a></td>
+	              			<td>{{webinfo.web_front}}</td>
+		              		<td>{{webinfo.web_language}}</td>
+		              		<td>{{webinfo.web_framework}}</td>
+		              		<td>{{webinfo.web_template}}</td>
+		              		<td>{{webinfo.web_container}}</td>
+	              		</tr>
+	              	</tbody>
+	              	{% endfor %}
+	              {% else %}
+	              <td>暂无信息</td>
+	              {% endif %}
+	               <tbody>
+	               <tr>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#web_add"><span class="glyphicon glyphicon-plus"></span>添加信息</button></td>
+	               </tr>
+	              </tbody>
+		    </table>
+		    <table class="table table-striped">
+		    	<thead>
+		    		<tr>
+	                  <th>组件名称</th>
+	                  <th>组件版本</th>
+	                  <th>添加时间</th>
+	                  <th>更新时间</th>
+	                  <th>所属网页</th>
+	                </tr>
+	              </thead>
+	              	{% for plug_list in plug_lists %}
+		              {% if plug_list %}
+		              	{% for plug in plug_list %}
+		              	<tbody>
+		              		<tr>
+		              			<td>{{plug.plug_name}}</td>
+			              		<td>{{plug.plug_version}}</td>
+			              		<td>{{plug.plug_starttime}}</td>
+			              		<td>{{plug.plug_updatetime}}</td>
+			              		<td><a href={{plug.plug_webinfo}} target = "_blank" >{{plug.plug_webinfo}}</a></td>
+		              		</tr>
+		              	</tbody>
+		              	{% endfor %}
+		              {% endif %}
+		            {% endfor %}
+	              <tbody>
+		               <tr>
+			              <td></td>
+			              <td></td>
+			              <td></td>
+			              <td></td>
+			              <td><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#plug_add"><span class="glyphicon glyphicon-plus"></span>添加信息</button></td>
+		               </tr>
+	              </tbody>
+	          </table>
+		</div>
+	</div>
+	<div class="tab-pane fade" id="server">
+		<div class="table-responsive">
+		    <table class="table table-striped">
+		    	<thead>
+		    		<tr>
+	                  <th>服务器名称</th>
+	                  <th>服务器IP</th>
+	                  <th>操作系统</th>
+	                  <th>添加时间</th>
+	                  <th>更新时间</th>
+	                </tr>
+	              </thead>
+	              {% if server_list %}
+	              	{% for server in server_list %}
+	              	<tbody>
+	              		<tr>
+	              			<td >{{server.server_name}}</td>
+		              		<td>{{server.server_ip}}</td>
+		              		<td>{{server.server_os}}</td>
+		              		<td>{{server.server_starttime}}</td>
+		              		<td>{{server.server_updatetime}}</td>
+	              		</tr>
+	              	</tbody>
+	              	{% endfor %}
+	              {% else %}
+	              <td>暂无信息</td>
+	              {% endif %}
+	               <tbody>
+	               <tr>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#server_add"><span class="glyphicon glyphicon-plus"></span>添加信息</button></td>
+	               </tr>
+	              </tbody>
+		    </table>
+		    <table class="table table-striped">
+		    	<thead>
+		    		<tr>
+	                  <th>应用名称</th>
+	                  <th>开放端口</th>
+	                  <th>对应服务</th>
+	                  <th>应用版本</th>
+	                  <th>所属服务器</th>
+	                </tr>
+	              </thead>
+	              	{% for port_list in port_lists %}
+		              {% if port_list %}
+		              	{% for port in port_list %}
+		              	<tbody>
+		              		<tr>
+		              			<td >{{port.name}}</td>
+			              		<td>{{port.port}}</td>
+			              		<td>{{port.product}}</td>
+			              		<td>{{port.version}}</td>
+			              		<td>{{port.port_server}}</td>
+		              		</tr>
+		              	</tbody>
+		              	{% endfor %}
+		              {% endif %}
+		            {% endfor %}
+	               <tbody>
+	               <tr>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td></td>
+		              <td><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#port_add"><span class="glyphicon glyphicon-plus"></span>添加信息</button></td>
+	               </tr>
+	              </tbody>
+		    </table>
+		</div>
+	</div>
+	{% include 'SRCinfo/info_add.html' %}
+</div>
+
+
+
+{% endblock %}

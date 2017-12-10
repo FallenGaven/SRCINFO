@@ -1,0 +1,68 @@
+{% load staticfiles %}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">  
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">  
+     
+    <meta name="description" content="Security Manage">  
+    <meta name="author" content="gy071089">  
+  
+    <title>管控平台</title>  
+  
+    <!-- Bootstrap core CSS -->  
+    <link href="{% static 'bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">  
+ 	<link href="{% static 'css_fun/dashboard.css' %}" rel="stylesheet">
+ 	<link href="{% static 'css_fun/theme.css' %}" rel="stylesheet">
+ 	<link href="{% static 'bootstrap/css/bootstrap-theme.css' %}" rel="stylesheet">
+ 	
+ 	<script src="{% static 'jQuery/jquery.min.js' %}"></script>
+	<script src="{% static 'bootstrap/js/bootstrap.min.js' %}"></script>
+	
+	<style>
+		body{background-size:cover;font-size: 16px;}
+		.table tbody tr td th{
+            vertical-align: middle;
+        }
+	</style>
+	
+</head>
+
+<body >
+	<!-- 页面顶部控件 -->
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <a class="navbar-brand" href="{% url 'view_SRC' %}">管控平台</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{% url 'view_SRC' %}">控制中心</a></li>
+            <li><a href="#">系统设置</a></li>
+            <li><a href="#">帮助中心</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">用户中心 <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">用户信息</a></li>
+			    <li><a href="#">更改密码</a></li>
+                <li class="dropdown-header"></li>
+                <li><a href="{% url 'signout' %}">注销登陆</a></li>
+              </ul>
+            </li>
+          </ul>
+          <form class="navbar-form navbar-right">
+            <input type="text" class="form-control" placeholder="Search...">
+          </form>
+        </div>
+      </div>
+    </nav>
+
+    {% block dashboard %}
+    
+    {% endblock %}
+</body>
+ 	
+
+</html>
