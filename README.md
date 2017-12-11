@@ -4,10 +4,10 @@
 
 登录页
 ![登陆](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/login.JPG)
-dashboard
-![控制面板](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/dashboard.JPG)
 添加应急中心信息
 ![添加应急中心信息](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/src_add.JPG)
+dashboard
+![控制面板](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/dashboard.JPG)
 信息查看
 ![信息查看](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/webinfo.JPG )
 测试数据
