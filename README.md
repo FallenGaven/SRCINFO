@@ -3,16 +3,14 @@
 以下为一些截图。毕竟这种东西比的就是谁的自动化好，自动化收集信息脚本就不给大家了。
 
 登录页
-![登陆](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/login.JPG);
+![登陆](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/login.JPG)
 dashboard
-![控制面板](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/dashboard.JPG);
+![控制面板](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/dashboard.JPG)
+添加应急中心信息
+![添加应急中心信息]（https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/src_add.JPG）
 信息查看
-![控制面板](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/webinfo.JPG );
+![信息查看](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/webinfo.JPG )
 测试数据
-![控制面板](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/test_data.JPG );
-添加服务器信息
-![控制面板](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/add_server_info.JPG );
-添加web信息
-![控制面板](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/add_web_info.JPG );
+![测试数据](https://github.com/FallenGavin/SRCINFO/blob/master/screenshot/test_data.JPG )
 
 
